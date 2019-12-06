@@ -1,10 +1,10 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
-
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                    "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -23,7 +23,6 @@ earlier adventurers. The only exit is to the south."""),
 
 
 # Link rooms together
-
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
@@ -36,16 +35,61 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+def mvmt(dir):
+    
+# Make a new player object(or instance of Player) that is currently in the 'outside' room.  
+p1 = Player("One", "Outside")
 
-# Make a new player object that is currently in the 'outside' room.
+cmd = str(input(["Please enter a command: [n] North, [e] East, [s] South, [w] West, [q] Quit\n"]))
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+# Write a loop
+while cmd != "q": 
+
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    if cmd == "n":
+        try:
+            if p1.current_room == "Outside":
+                # Prints the current room name
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+                # Prints the current description (the textwrap module might be useful here).
+                pass
+            elif p1.current_room == "Foyer":
+                current_room = current_room.n_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+            elif p1.current_room == "Narrow":
+                current_room = current_room.n_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+            # Print an error message if the movement isn't allowed.
+        except:
+            print(f"{cmd} is not allowed here.")
+    elif cmd == "e":
+        try:
+            if p1.current_room == "Narrow":
+                current_room = current_room.e_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+        except:
+            print(f"{cmd} is not allowed here.")
+    elif cmd == "s":
+        try:
+            if p1.current_room == "Overlook":
+                current_room = current_room.s_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+            elif p1.current_room == "Foyer":
+                current_room = current_room.s_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+            elif p1.current_room == "Treasure":
+                current_room = current_room.s_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+        except:
+            print(f"{cmd} is not allowed here.")
+    elif cmd == "w":
+        try:
+            if p1.current_room == "Foyer":
+                current_room = current_room.w_to
+                print(f"{p1.name}, your current location is: {p1.current_room}.")
+        except:
+            print(f"{cmd} is not allowed here.")
+    # else cmd == "q":
+    #     try:
+    #     print("Goodbye!")
+    #     # If the user enters "q", quit the game.

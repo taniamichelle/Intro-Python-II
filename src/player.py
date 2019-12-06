@@ -2,20 +2,9 @@
 # currently.
 class Player:
     '''
-    Player class with attributes: player_name, current_room
+    Player class with attributes: name, current_room
     '''
-    def __init__(self, player_name, current_room):
-        self.player_name = player_name
+    def __init__(self, name, current_room):
+        self.name = name
         self.current_room = current_room
     
-    def get_player_name(self):
-        '''
-        Returns player_name
-        '''
-        return self.player_name
-    
-    def get_current_room(self):
-        '''
-        Returns current_room
-        '''
-        return self.current_room
